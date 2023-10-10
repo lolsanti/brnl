@@ -26,6 +26,13 @@ def authenticate_user(username, password):
     return user
 
 
+def dict_factory(cursor, row):
+    d = {}
+    for idx, col in enumerate(cursor.description):
+        d[col[0]] = row[idx]
+    return d
+
+
 @app.route('/')
 def index():
     return "Главная страница"
@@ -108,6 +115,24 @@ def user_login():
 def user_logout():
     session.pop('current_user', None)
     return redirect(url_for('user_login'))
+
+
+@app.route('/menu', methods=['GET', 'POST'])
+def view_menu():
+    con = sqlite3.connect("glovo.db")
+    con.row_factory = dict_factory
+    cur = con.cursor()
+
+    cur.execute("SELECT * FROM category")
+    category = cur.fetchall()
+    cur.execute("SELECT * FROM dishes WHERE available > 0")
+    dishes = cur.fetchall()
+
+    con.close()
+
+    current_user = session.get('current_user')  # Получить текущего пользователя из сессии
+
+    return render_template("menu.html", current_user=current_user, category=category, dishes=dishes)
 
 
 if __name__ == '__main__':

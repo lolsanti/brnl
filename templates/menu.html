@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Меню</title>
+</head>
+<body>
+    <h1>Меню</h1>
+
+    {% if current_user %}
+        <!-- Если пользователь авторизован, отобразите его имя и ссылку на выход -->
+        <p>Добро пожаловать, {{ current_user[1] }}!</p>
+        <a href="/user/logout">Выйти</a>
+    {% else %}
+        <!-- Если пользователь не авторизован, отобразите ссылки на вход и регистрацию -->
+        <a href="/user/login">Войти</a>
+        <a href="/user/register">Регистрация</a>
+    {% endif %}
+
+    <h2>Категории:</h2>
+    <ul>
+        {% for cat in category %}
+            <li>{{ cat['name'] }}</li>  <!-- Обратите внимание на правильный ключ 'name' -->
+        {% endfor %}
+    </ul>
+
+    <h2>Блюда:</h2>
+    <ul>
+        {% for dish in dishes %}
+            <li>
+                <h3>{{ dish.dish_name }}</h3>
+                <p>Цена: {{ dish.price }} руб.</p>
+                <p>{{ dish.description }}</p>
+                <p>Доступно: {{ "Да" if dish.available == 1 else "Нет" }}</p>
+                <p>Категория: {{ dish.category }}</p>
+                <p>Калории: {{ dish.ccal }}</p>
+                <p>Белки: {{ dish.protein }}</p>
+                <p>Жиры: {{ dish.fat }}</p>
+                <p>Углеводы: {{ dish.carb }}</p>
+                <img src="{{ dish.photo }}" alt="{{ dish.dish_name }}" width="200">
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
