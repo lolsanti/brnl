@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Регистрация</title>
+</head>
+<body>
+    <h1>Регистрация</h1>
+    <form method="POST" action="/user/register">
+        <label for="username">Имя пользователя:</label>
+        <input type="text" name="username" required><br>
+
+        <label for="password">Пароль:</label>
+        <input type="password" name="password" required><br>
+
+        <label for="number">Номер:</label>
+        <input type="number" name="number" required><br>
+
+        <label for="telegram">Telegram:</label>
+        <input type="text" name="telegram"><br>
+
+        <label for="role">Роль:</label>
+        <select name="role">
+            <option value="1">Админ</option>
+            <option value="2">Обычный пользователь</option>
+        </select><br>
+
+        <input type="submit" value="Зарегистрироваться">
+    </form>
+</body>
+</html>

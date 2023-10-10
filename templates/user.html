@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Страница пользователя</title>
+</head>
+<body>
+    <h1>Страница пользователя</h1>
+    <p>Привет, {{ current_user[1] }}!</p>
+    <p>Номер: {{ current_user[3] }}</p>
+    <p>Роль: {{ "Админ" if user_role == 1 else "Обычный пользователь" }}</p>
+    <p>Telegram: {{ current_user[4] }}</p>
+    <a href="/user/logout">Выйти</a>
+</body>
+</html>
