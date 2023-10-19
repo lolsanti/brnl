@@ -38,6 +38,66 @@ def index():
     return "Главная страница"
 
 
+@app.route('/admin', methods=['GET', 'PUT', 'DELETE'])
+def admin():
+    return
+
+
+@app.route('/admin/dishes', methods=['GET'])
+def dishes():
+    return
+
+
+@app.route('/admin/dishes/add', methods=['POST'])
+def dishes_add():
+    return
+
+
+@app.route('/admin/dishes/<dish_name>', methods=['GET', 'PUT', 'DELETE'])
+def admin_dish_name():
+    return
+
+
+@app.route('/admin/current_orders', methods=['GET'])
+def get_current_orders():
+    return
+
+
+@app.route('/admin/current_orders/<order_id>', methods=['GET', 'PUT'])
+def order_id():
+    return
+
+
+@app.route('/admin/category_list', methods=['GET', 'POST'])
+def category_list():
+    return
+
+
+@app.route('/admin/category_list/<category_name>', methods=['GET', 'DELETE'])
+def category_name():
+    return
+
+
+@app.route('/admin/search', methods=['GET/POST'])
+def admin_search():
+    return
+
+
+@app.route('/cart', methods=['GET', 'PUT'])
+def cart():
+    return
+
+
+@app.route('/cart/order', methods=['POST'])
+def cart_order():
+    return
+
+
+@app.route('/cart/add', methods=['POST', 'PUT'])
+def cart_add():
+    return
+
+
 @app.route('/user', methods=['GET', 'POST', 'DELETE'])
 def user_page():
     if 'current_user' in session:
@@ -117,6 +177,31 @@ def user_logout():
     return redirect(url_for('user_login'))
 
 
+@app.route('/user/restore', methods=['POST'])
+def user_restore():
+    return "User restore password page"
+
+
+@app.route('/user/orders', methods=['GET'])
+def user_orders_history():
+    return
+
+
+@app.route('/user/orders/<order_id>', methods=['GET'])
+def user_order(order_id: int):
+    return
+
+
+@app.route('/user/address', methods=['GET', 'POST'])
+def user_address_list():
+    return
+
+
+@app.route('/user/address/<address_id>', methods=['GET', 'PUT', 'DELETE'])
+def user_address(address_id: int):
+    return
+
+
 @app.route('/menu', methods=['GET', 'POST'])
 def view_menu():
     con = sqlite3.connect("glovo.db")
@@ -133,6 +218,26 @@ def view_menu():
     current_user = session.get('current_user')  # Получить текущего пользователя из сессии
 
     return render_template("menu.html", current_user=current_user, category=category, dishes=dishes)
+
+
+@app.route('/menu/<cat_name>', methods=['GET'])
+def menu_cat_name():
+    return
+
+
+@app.route('/menu/<cat_name>/<dish>', methods=['GET'])
+def menu_cat_name_dish():
+    return redirect(url_for('menu_cat_name'))
+
+
+@app.route('/menu/<cat_name>/<dish>/review', methods=['POST'])
+def menu_review():
+    return
+
+
+@app.route('/menu/search', methods=['GET', 'POST'])
+def menu_search():
+    return
 
 
 if __name__ == '__main__':
